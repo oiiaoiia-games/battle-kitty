@@ -192,7 +192,7 @@
     document.getElementById('help').style.display = 'block';
   }
 
-  function simulateKey(key, event) {
+  function simulateKey(key, event, initial) {
     const keyCodeMap = {
       ' ': 32,
       'Enter': 13,
@@ -213,7 +213,10 @@
     const keyEvent = new KeyboardEvent(event, eventOptions);
 
     document.dispatchEvent(keyEvent);
-    navigator.vibrate(100);
+
+    if (initial) {
+      navigator.vibrate(100);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -230,7 +233,7 @@
     const intervals = new Map();
 
     function startRepeat(btn, key) {
-      simulateKey(key, 'keydown');
+      simulateKey(key, 'keydown', true);
       if (intervals.has(btn)) return;
 
       const intervalId = setInterval(() => {
