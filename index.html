@@ -30,28 +30,28 @@
       <div class="directional">
         <div></div>
         <div>
-          <button class="control-button" onmouseup="simulateKey('ArrowUp', 'keyup')" onmousedown="simulateKey('ArrowUp', 'keydown')">⬆</button>
+          <button id="btnArrowUp" class="control-button">⬆</button>
         </div>
         <div></div>
 
         <div>
-          <button class="control-button" onmouseup="simulateKey('ArrowLeft', 'keyup')" onmousedown="simulateKey('ArrowLeft', 'keydown')">⬅</button>
+          <button id="btnArrowLeft" class="control-button">⬅</button>
         </div>
         <div></div>
         <div>
-          <button class="control-button" onmouseup="simulateKey('ArrowRight', 'keyup')" onmousedown="simulateKey('ArrowRight', 'keydown')">➡</button>
+          <button id="btnArrowRight" class="control-button">➡</button>
         </div>
 
         <div></div>
         <div>
-          <button class="control-button" onmouseup="simulateKey('ArrowDown', 'keyup')" onmousedown="simulateKey('ArrowDown', 'keydown')">⬇</button>
+          <button id="btnArrowDown" class="control-button">⬇</button>
         </div>
         <div></div>
       </div>
 
       <div class="actions">
-        <button class="control-button" onmouseup="simulateKey(' ', 'keyup')" onmousedown="simulateKey(' ', 'keydown')">🔫</button>
-        <button class="control-button" onmouseup="simulateKey('Enter', 'keyup')" onmousedown="simulateKey('Enter', 'keydown')">
+        <button id="btnSpace" class="control-button">🔫</button>
+        <button id="btnEnter" class="control-button">
           <img src="images/Nintendo-Button-Start.png" alt="" />
         </button>
       </div>
@@ -210,9 +210,75 @@
       bubbles: true
     };
 
-    const downEvent = new KeyboardEvent(event, eventOptions);
+    const keyEvent = new KeyboardEvent(event, eventOptions);
 
-    document.dispatchEvent(downEvent);
+    document.dispatchEvent(keyEvent);
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const repeatIntervalMs = 100;
+    const buttonsToKeys = {
+      btnArrowUp: 'ArrowUp',
+      btnArrowDown: 'ArrowDown',
+      btnArrowLeft: 'ArrowLeft',
+      btnArrowRight: 'ArrowRight',
+      btnSpace: ' ',
+      btnEnter: 'Enter'
+    };
+
+    const intervals = new Map();
+
+    function startRepeat(btn, key) {
+      simulateKey(key, 'keydown');
+      if (intervals.has(btn)) return;
+
+      const intervalId = setInterval(() => {
+        simulateKey(key, 'keydown');
+      }, repeatIntervalMs);
+
+      intervals.set(btn, intervalId);
+    }
+
+    function stopRepeat(btn, key) {
+      if (intervals.has(btn)) {
+        clearInterval(intervals.get(btn));
+        intervals.delete(btn);
+      }
+      simulateKey(key, 'keyup');
+    }
+
+    for (const [btnId, key] of Object.entries(buttonsToKeys)) {
+      const btn = document.getElementById(btnId);
+      if (!btn) continue;
+
+      btn.addEventListener('mousedown', e => {
+        e.preventDefault();
+        startRepeat(btn, key);
+      });
+      btn.addEventListener('mouseup', e => {
+        e.preventDefault();
+        stopRepeat(btn, key);
+      });
+      btn.addEventListener('mouseleave', e => {
+        e.preventDefault();
+        stopRepeat(btn, key);
+      });
+
+      btn.addEventListener('touchstart', e => {
+        e.preventDefault();
+        startRepeat(btn, key);
+      }, { passive: false });
+
+      btn.addEventListener('touchend', e => {
+        e.preventDefault();
+        stopRepeat(btn, key);
+      }, { passive: false });
+
+      btn.addEventListener('touchcancel', e => {
+        e.preventDefault();
+        stopRepeat(btn, key);
+      }, { passive: false });
+    }
+  });
 </script>
 </html>
