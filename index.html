@@ -213,6 +213,7 @@
     const keyEvent = new KeyboardEvent(event, eventOptions);
 
     document.dispatchEvent(keyEvent);
+    navigator.vibrate(100);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
