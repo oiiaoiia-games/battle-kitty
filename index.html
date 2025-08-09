@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spinning cat</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+  <div id="main">
+    <div id="help">
+      <p>CONTROLS:</p>
+      <table>
+        <tr>
+          <td><img src="images/Nintendo-Dpad-Neutral.png" alt="" /></td>
+          <td>ARROWS</td>
+        </tr>
+        <tr>
+          <td><img src="images/Nintendo-Button-A.png" alt="" />,<img src="images/Nintendo-Button-B.png" alt="" /></td>
+          <td>SPACE</td>
+        </tr>
+        <tr>
+          <td><img src="images/Nintendo-Button-Start.png" alt="" /></td>
+          <td>ENTER</td>
+        </tr>
+      </table>
+    </div>
+    <div id="mobile-controls">
+      <div class="directional">
+        <div></div>
+        <div>
+          <button class="control-button" onmouseup="simulateKey('ArrowUp', 'keyup')" onmousedown="simulateKey('ArrowUp', 'keydown')">⬆</button>
+        </div>
+        <div></div>
+
+        <div>
+          <button class="control-button" onmouseup="simulateKey('ArrowLeft', 'keyup')" onmousedown="simulateKey('ArrowLeft', 'keydown')">⬅</button>
+        </div>
+        <div></div>
+        <div>
+          <button class="control-button" onmouseup="simulateKey('ArrowRight', 'keyup')" onmousedown="simulateKey('ArrowRight', 'keydown')">➡</button>
+        </div>
+
+        <div></div>
+        <div>
+          <button class="control-button" onmouseup="simulateKey('ArrowDown', 'keyup')" onmousedown="simulateKey('ArrowDown', 'keydown')">⬇</button>
+        </div>
+        <div></div>
+      </div>
+
+      <div class="actions">
+        <button class="control-button" onmouseup="simulateKey(' ', 'keyup')" onmousedown="simulateKey(' ', 'keydown')">🔫</button>
+        <button class="control-button" onmouseup="simulateKey('Enter', 'keyup')" onmousedown="simulateKey('Enter', 'keydown')">
+          <img src="images/Nintendo-Button-Start.png" alt="" />
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="src/Utils.js"></script>
+<script type="text/javascript" src="src/Point.js"></script>
+<script type="text/javascript" src="src/Rect.js"></script>
+<script type="text/javascript" src="src/Sprite.js"></script>
+<script type="text/javascript" src="src/Tank.js"></script>
+<script type="text/javascript" src="src/Wall.js"></script>
+<script type="text/javascript" src="src/SpriteContainer.js"></script>
+<script type="text/javascript" src="src/CollisionDetector.js"></script>
+<script type="text/javascript" src="src/EventManager.js"></script>
+<script type="text/javascript" src="src/SpriteController.js"></script>
+<script type="text/javascript" src="src/TankController.js"></script>
+<script type="text/javascript" src="src/Keyboard.js"></script>
+<script type="text/javascript" src="src/BulletFactory.js"></script>
+<script type="text/javascript" src="src/Bullet.js"></script>
+<script type="text/javascript" src="src/Painter.js"></script>
+<script type="text/javascript" src="src/Updater.js"></script>
+<script type="text/javascript" src="src/BulletExplosionFactory.js"></script>
+<script type="text/javascript" src="src/Explosion.js"></script>
+<script type="text/javascript" src="src/BulletExplosion.js"></script>
+<script type="text/javascript" src="src/BrickWall.js"></script>
+<script type="text/javascript" src="src/SteelWall.js"></script>
+<script type="text/javascript" src="src/Cursor.js"></script>
+<script type="text/javascript" src="src/BlinkTimer.js"></script>
+<script type="text/javascript" src="src/CursorController.js"></script>
+<script type="text/javascript" src="src/Builder.js"></script>
+<script type="text/javascript" src="src/StructureManager.js"></script>
+<script type="text/javascript" src="src/BrickWallFactory.js"></script>
+<script type="text/javascript" src="src/SteelWallFactory.js"></script>
+<script type="text/javascript" src="src/Globals.js"></script>
+<script type="text/javascript" src="src/SpriteSerializer.js"></script>
+<script type="text/javascript" src="src/Base.js"></script>
+<script type="text/javascript" src="src/TankStateAppearing.js"></script>
+<script type="text/javascript" src="src/TankStateNormal.js"></script>
+<script type="text/javascript" src="src/TankStateInvincible.js"></script>
+<script type="text/javascript" src="src/AITankController.js"></script>
+<script type="text/javascript" src="src/Random.js"></script>
+<script type="text/javascript" src="src/AITankControllerFactory.js"></script>
+<script type="text/javascript" src="src/AITankControllerContainer.js"></script>
+<script type="text/javascript" src="src/EnemyFactory.js"></script>
+<script type="text/javascript" src="src/Animation.js"></script>
+<script type="text/javascript" src="src/TankExplosionFactory.js"></script>
+<script type="text/javascript" src="src/TankExplosion.js"></script>
+<script type="text/javascript" src="src/PointsFactory.js"></script>
+<script type="text/javascript" src="src/Points.js"></script>
+<script type="text/javascript" src="src/PlayerTankFactory.js"></script>
+<script type="text/javascript" src="src/PlayerTankControllerFactory.js"></script>
+<script type="text/javascript" src="src/PowerUpFactory.js"></script>
+<script type="text/javascript" src="src/PowerUp.js"></script>
+<script type="text/javascript" src="src/PowerUpHandler.js"></script>
+<script type="text/javascript" src="src/FreezeTimer.js"></script>
+<script type="text/javascript" src="src/BaseWallBuilder.js"></script>
+<script type="text/javascript" src="src/ShovelHandler.js"></script>
+<script type="text/javascript" src="src/Pause.js"></script>
+<script type="text/javascript" src="src/PauseListener.js"></script>
+<script type="text/javascript" src="src/BaseExplosionFactory.js"></script>
+<script type="text/javascript" src="src/BaseExplosion.js"></script>
+<script type="text/javascript" src="src/TankColor.js"></script>
+<script type="text/javascript" src="src/SceneManager.js"></script>
+<script type="text/javascript" src="src/MainMenuScene.js"></script>
+<script type="text/javascript" src="src/MainMenuItem.js"></script>
+<script type="text/javascript" src="src/OnePlayerMenuItem.js"></script>
+<script type="text/javascript" src="src/MainMenu.js"></script>
+<script type="text/javascript" src="src/MainMenuController.js"></script>
+<script type="text/javascript" src="src/MainMenuView.js"></script>
+<script type="text/javascript" src="src/MainMenuCursor.js"></script>
+<script type="text/javascript" src="src/MainMenuCursorView.js"></script>
+<script type="text/javascript" src="src/Gamefield.js"></script>
+<script type="text/javascript" src="src/Level.js"></script>
+<script type="text/javascript" src="src/EnemyFactoryView.js"></script>
+<script type="text/javascript" src="src/LivesView.js"></script>
+<script type="text/javascript" src="src/MainMenuView.js"></script>
+<script type="text/javascript" src="src/Curtain.js"></script>
+<script type="text/javascript" src="src/Script.js"></script>
+<script type="text/javascript" src="src/Delay.js"></script>
+<script type="text/javascript" src="src/GameScene.js"></script>
+<script type="text/javascript" src="src/StageMessage.js"></script>
+<script type="text/javascript" src="src/Stages.js"></script>
+<script type="text/javascript" src="src/MoveFn.js"></script>
+<script type="text/javascript" src="src/GameOverMessage.js"></script>
+<script type="text/javascript" src="src/StageStatisticsScene.js"></script>
+<script type="text/javascript" src="src/GameOverScene.js"></script>
+<script type="text/javascript" src="src/Player.js"></script>
+<script type="text/javascript" src="src/StageStatisticsPoints.js"></script>
+<script type="text/javascript" src="src/Trees.js"></script>
+<script type="text/javascript" src="src/Water.js"></script>
+<script type="text/javascript" src="src/LoadingScene.js"></script>
+
+<script type="text/javascript" src="src/Stats.js"></script>
+<script type="text/javascript" src="src/FPSCounter.js"></script>
+
+<script type="text/javascript" src="src/ImageManager.js"></script>
+<script type="text/javascript" src="src/SpriteSerializerController.js"></script>
+<script type="text/javascript" src="src/SpriteSerializer.js"></script>
+<script type="text/javascript" src="src/SoundManager.js"></script>
+<script type="text/javascript">
+  $(function () {
+    const fps = 50;
+
+    const canvasId = 'canvas';
+    const ctx = createCanvasContext();
+    ctx.font = "16px prstart"
+
+    const eventManager = new EventManager();
+    const keyboard = new Keyboard(eventManager);
+    const sceneManager = new SceneManager(eventManager);
+    sceneManager.toLoadingScene();
+
+    setInterval(gameLoop, 1000 / fps);
+
+    function gameLoop() {
+      keyboard.fireEvents();
+      sceneManager.update();
+      sceneManager.draw(ctx);
+    }
+
+    function createCanvasContext() {
+      $('<canvas id="' + canvasId + '" width="' + Globals.CANVAS_WIDTH + '" height="' + Globals.CANVAS_HEIGHT + '"></canvas>').prependTo('#main');
+      const canvas = document.getElementById(canvasId);
+      return canvas.getContext('2d');
+    }
+  });
+
+  function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  if (isMobileDevice()) {
+    document.getElementById('mobile-controls').style.display = 'flex';
+  } else {
+    document.getElementById('help').style.display = 'block';
+  }
+
+  function simulateKey(key, event) {
+    const keyCodeMap = {
+      ' ': 32,
+      'Enter': 13,
+      'ArrowUp': 38,
+      'ArrowDown': 40,
+      'ArrowLeft': 37,
+      'ArrowRight': 39
+    };
+
+    const eventOptions = {
+      key: key,
+      code: key,
+      keyCode: keyCodeMap[key],
+      which: keyCodeMap[key],
+      bubbles: true
+    };
+
+    const downEvent = new KeyboardEvent(event, eventOptions);
+
+    document.dispatchEvent(downEvent);
+  }
+</script>
+</html>

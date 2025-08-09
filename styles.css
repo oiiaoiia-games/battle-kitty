@@ -1,0 +1,95 @@
+@font-face {
+    font-family: prstart;
+    src: url('prstart.ttf');
+}
+
+body {
+    font-family: prstart;
+    font-size: 16px;
+    background-color: #14ff06;
+    margin-top: 30px;
+}
+
+#main {
+    margin: 0 auto;
+    width: 512px;
+    color: white;
+}
+
+#help {
+    border-top: 4px solid white;
+    margin-top: 10px;
+    padding-top: 7px;
+}
+
+#help img {
+    vertical-align: middle;
+}
+
+#help td {
+    padding-left: 1em;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+#mobile-controls {
+    display: none;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#help {
+    display: none;
+}
+
+.control-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+
+    padding: 16px 16px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f0f0;
+    text-align: center;
+    border: none;
+    border-radius: 99px;
+    background: linear-gradient(to bottom, rgba(255, 0, 0, 0.8), rgba(140, 17, 32, 0.8));;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.control-button:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.directional {
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.directional div .control-button {
+    padding: 25px;
+    border-radius: 50px;
+}
+
+.actions .control-button {
+    margin-top: 10px;
+    margin-left: 90px;
+    margin-bottom: 40px;
+    padding: 30px;
+    border-radius: 60px;
+}
