@@ -6,7 +6,7 @@ Function.prototype.subclass = function(base) {
 Function.prototype.subclass.nonconstructor = function() {};
 
 const backgroundImage = new Image();
-backgroundImage.src = "/images/player/backgroud.png";
+backgroundImage.src = "images/backgroud.png";
 const oiiaColor = "#14ff06"
 
 // Get the size of an object

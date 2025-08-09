@@ -211,12 +211,6 @@ Tank.prototype.getTurnRoundTo = function () {
 };
 
 Tank.prototype.move = function () {
-  const tank = this._state._tank;
-
-  if (tank.isPlayer() && tank._speed > 0) {
-    tank.upgrade();
-  }
-
   if (!this._state.canMove()) {
     return;
   }
